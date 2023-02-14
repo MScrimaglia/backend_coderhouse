@@ -64,8 +64,7 @@ class ProductManager {
                     return product;
                 }
             }
-        console.error('Product not found');
-        return;
+        return {'error': 'Product not found'};
         })
         
         

@@ -13,10 +13,18 @@ app.get('/products', async (req, res) => {
 
     let limit = req.query.limit;
 
-    await productManager.getProducts().then( response => {
+    await productManager.getProducts().then(response => {
         if (limit) {
             return res.send(response.slice(0,limit));
         }
+        return res.send(response);
+    });
+})
+app.get('/products/:id', async (req, res) => {
+
+    let id = req.params.id;
+
+    await productManager.getProductById(id).then( response => {
         return res.send(response);
     });
 })
