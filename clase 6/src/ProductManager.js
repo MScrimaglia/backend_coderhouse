@@ -59,12 +59,9 @@ class ProductManager {
 
     getProductById = async (id) => {
         return await this.getProducts().then((products) => {
-            for (let product of products) {
-                if (product.id == id) {
-                    return product;
-                }
-            }
-        return {'error': 'Product not found'};
+            let found_product = products.find(product => product.id == id);
+            if (found_product) {return found_product;}
+            return {'error': 'Product not found'};
         })
         
         
