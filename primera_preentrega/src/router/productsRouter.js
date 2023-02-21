@@ -4,7 +4,7 @@ const productsRouter = express.Router();
 
 const ProductManager = require("../controller/productManager.js");
 
-productManager = new ProductManager();
+const productManager = new ProductManager();
 
 productsRouter.get('/', async (req, res) => {
 

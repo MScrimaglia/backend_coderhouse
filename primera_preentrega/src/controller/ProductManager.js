@@ -92,7 +92,6 @@ class ProductManager {
         await this.getProductById(id).then((target_product) => {
             this.getProducts().then((products) => {
                 products.map((product) => {
-                    console.log('index' + products.indexOf(product));
                     if (product.id == target_product.id) {
                         products.splice(products.indexOf(product),1);
                         fs.promises.writeFile(this.path, [JSON.stringify(products)]);
