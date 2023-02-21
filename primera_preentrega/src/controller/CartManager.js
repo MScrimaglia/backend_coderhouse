@@ -10,7 +10,7 @@ class CartManager {
     }
 
 
-    async addCart(products_id) {
+    async addCart(products) {
 
         let carts = [];
 
@@ -18,24 +18,17 @@ class CartManager {
         .then((data) => carts = JSON.parse(data))
         .finally(() => {
             let cart_id = Math.floor(100000 + Math.random() * 900000);
-            console.log(cart_id);
 
             let cart = {
                 id: cart_id,
                 products: []
             }
-            console.log(cart);
 
-            for (let product_id of products_id) {
-                productManager.getProductById(product_id).then(product => {
-                    if (!product.hasOwnProperty('error')) {
-                        cart.products.push(product);
-                    }
-                })
+            for  (let product of products) {
+                cart.products.push(product);
             }
 
             carts.push(cart)
-            console.log(carts);
 
             fs.promises.writeFile(this.path, JSON.stringify(carts));
         })
