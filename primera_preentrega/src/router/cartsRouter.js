@@ -11,4 +11,11 @@ cartsRouter.post('/', async (req, res) => {
     await cartManager.addCart(products);
 });
 
+cartsRouter.get('/:id', async (req, res) => {
+    let id = parseInt(req.params.id);
+    await cartManager.getCartProductsById(id).then(products => {
+        res.send(products);
+    });
+});
+
 module.exports =  cartsRouter;

@@ -35,16 +35,18 @@ class CartManager {
  
     }
 
-    getProductById = async (id) => {
-        return await this.getProducts().then((products) => {
-            for (let product of products) {
-                if (product.id == id) {
-                    return product;
-                }
-            }
-        return {'error': 'Product not found'};
-        })
+    getCartProductsById = async (id) => {
+
+        let products = [];
         
+        await fs.promises.readFile(this.path, 'utf-8')
+        .then((data) => {
+            let carts = JSON.parse(data)
+            let cart = carts.find(selected_cart => selected_cart.id == id);
+            products = cart.products
+        })
+
+        return products;
         
     }
 
