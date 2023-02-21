@@ -3,7 +3,7 @@ const fs = require('fs');
 class ProductManager {
 
     constructor() {
-        this.path = './products.json';
+        this.path = './data/products.json';
     }
 
 
@@ -95,7 +95,6 @@ class ProductManager {
                     console.log('index' + products.indexOf(product));
                     if (product.id == target_product.id) {
                         products.splice(products.indexOf(product),1);
-                        console.log('producttsatsdatdsarsd' + products);
                         fs.promises.writeFile(this.path, [JSON.stringify(products)]);
                     }
                 })
