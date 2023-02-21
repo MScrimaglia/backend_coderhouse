@@ -23,7 +23,7 @@ class ProductManager {
             return console.error('Invalid number of parameters');
         }
         for (let argument of arguments){
-            if (argument == false){
+            if (!argument){
                 return console.error('Missing required parameter');
             }
         }

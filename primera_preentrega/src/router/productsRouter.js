@@ -31,10 +31,10 @@ productsRouter.post('/', async (req, res) => {
 
     let title = req.query.title;
     let description = req.query.description;
-    let price = req.query.price;
+    let price = Number(req.query.price);
     let thumbnail = req.query.thumbnail;
     let code = req.query.code;
-    let stock = req.query.stock;
+    let stock = Number(req.query.stock);
 
     await productManager.addProduct(title, description, price, thumbnail, code, stock);
 
