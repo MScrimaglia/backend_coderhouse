@@ -18,4 +18,10 @@ cartsRouter.get('/:id', async (req, res) => {
     });
 });
 
+cartsRouter.post('/:id/product/:pid', async (req, res) => {
+    let pid = parseInt(req.params.pid);
+    let cid = parseInt(req.params.id);
+    await cartManager.addProduct(pid, cid);
+});
+
 module.exports =  cartsRouter;

@@ -50,35 +50,18 @@ class CartManager {
         
     }
 
-    updateProduct = async (id, new_val) => {
+    addProduct = async (pid, cid) => {
 
-        if (new_val.hasOwnProperty('id')){
-            console.error('ID can not be modified');
-            return;
-        }
-
-        await this.getProducts().then((products) => {
-
-            let outdated_product = products.find(product => product.id == id);
-
-            Object.assign(outdated_product, new_val)
-
-            fs.promises.writeFile(this.path, [JSON.stringify(products)]);
-        })
-    }
-
-    deleteProduct = async (id) => {
-
-        await this.getProductById(id).then((target_product) => {
-            this.getProducts().then((products) => {
-                products.map((product) => {
-                    if (product.id == target_product.id) {
-                        products.splice(products.indexOf(product),1);
-                        fs.promises.writeFile(this.path, [JSON.stringify(products)]);
-                    }
-                })
-            })
-        })
+        await fs.promises.readFile(this.path, 'utf-8').then(
+            data => {
+                let carts = JSON.parse(data)
+                let cart = carts.find(selected_cart => selected_cart.id == cid);
+                productManager.getProductById(pid).then(product => {
+                    cart.products.push(product);
+                    fs.promises.writeFile(this.path, JSON.stringify(carts));
+                });
+            }
+        )
     }
 
 }
