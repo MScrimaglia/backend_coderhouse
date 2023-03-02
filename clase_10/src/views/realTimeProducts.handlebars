@@ -1,10 +1,23 @@
 <div>
-    {{!-- <ul>
+    <h1>Real time products</h1>
+    <ul>
         {{#each products}}
         <li>{{title}}</li>
         {{/each}}
-    </ul> --}}
-    <h1>TEST</h1>
+    </ul>
 </div>
+<form id="new_product_form">
+    <label for="input_title">Title:</label><br>
+    <input type="text" class="new_product_form_input" id="input_title" name="input_title"><br>
+    <label for="input_description">Description:</label><br>
+    <input type="text" class="new_product_form_input" id="input_description" name="input_description"><br>
+    <label for="input_price">Price:</label><br>
+    <input type="number" class="new_product_form_input" min="0" id="input_price" name="input_price"><br>
+    <label for="input_code">Code:</label><br>
+    <input type="text" class="new_product_form_input" id="input_code" name="input_code"><br>
+    <label for="input_stock">Stock:</label><br>
+    <input type="number" class="new_product_form_input" min="0" id="input_stock" name="input_stock"><br>
+    <button type="submit">Save</button>
+</form>
 <script src='/socket.io/socket.io.js'></script>
 <script src='/js/real_time_products.js'></script>

@@ -6,6 +6,7 @@ const {Server} = require('socket.io')
 
 const app = express();
 const port = 8080;
+const base_url = 'http://127.0.0.1:8080/';
 
 app.engine('handlebars', handlebars.engine());
 app.set('view engine', 'handlebars');
@@ -18,7 +19,7 @@ app.use('/api/carts/', cartsRouter);
 
 app.get('/', async (req,res) => {
     let products = [{title: 'No se han encontrado productos'}];
-    await fetch('http://127.0.0.1:8080/api/products')
+    await fetch(base_url + 'api/products')
     .then(response => response.json())
     .then((json) => {
         products = json;
@@ -29,7 +30,7 @@ app.get('/', async (req,res) => {
 
 app.get('/realtimeproducts', async (req,res) => {
     let products = [{title: 'No se han encontrado productos'}];
-    await fetch('http://127.0.0.1:8080/api/products')
+    await fetch(base_url + 'api/products')
     .then(response => response.json())
     .then((json) => {
         products = json;
@@ -40,3 +41,11 @@ app.get('/realtimeproducts', async (req,res) => {
 
 const httpServer = app.listen(port,() => console.log('Port 8080'));
 const socketServer = new Server(httpServer);
+
+socketServer.on('connection', (socket) => {
+    console.log('New connection');
+
+    socket.on('new_product', (product) => {
+        console.log('PRODUCT TITLE: ' + product.title);
+    })
+})
