@@ -6,25 +6,13 @@ const ProductManager = require("../controller/productManager.js");
 
 const productManager = new ProductManager();
 
-/* productsRouter.get('/', async (req, res) => {
-
-    let limit = req.query.limit;
-
-    await productManager.getProducts().then(response => {
-        if (limit) {
-            return res.send(response.slice(0,limit));
-        }
-        return res.render('index',{products:response});
-    });
-}); */
-
 productsRouter.get('/', async (req, res) => {
 
     let limit = req.query.limit;
 
     await productManager.getProducts().then(response => {
         if (limit) {
-            return res.send(response.slice(0,limit));
+            return res.json(response.slice(0,limit));
         }
         return res.json(response);
     });
