@@ -6,7 +6,7 @@ const ProductManager = require("../controller/productManager.js");
 
 const productManager = new ProductManager();
 
-productsRouter.get('/', async (req, res) => {
+/* productsRouter.get('/', async (req, res) => {
 
     let limit = req.query.limit;
 
@@ -16,9 +16,9 @@ productsRouter.get('/', async (req, res) => {
         }
         return res.render('index',{products:response});
     });
-});
+}); */
 
-/* productsRouter.get('/', async (req, res) => {
+productsRouter.get('/', async (req, res) => {
 
     let limit = req.query.limit;
 
@@ -26,9 +26,9 @@ productsRouter.get('/', async (req, res) => {
         if (limit) {
             return res.send(response.slice(0,limit));
         }
-        return res.send(response);
+        return res.json(response);
     });
-}); */
+});
 
 productsRouter.get('/:pid', async (req, res) => {
 

@@ -3,7 +3,7 @@ const fs = require('fs');
 class ProductManager {
 
     constructor() {
-        this.path = './data/products.json';
+        this.path = './src/data/products.json';
     }
 
 
@@ -12,7 +12,10 @@ class ProductManager {
 
         await fs.promises.readFile(this.path, 'utf-8')
         .then((data) => products = JSON.parse(data))
-        .catch(() => products = []);
+        .catch((error) => {
+            console.log(error);
+            products = []
+        });
 
 
         return products;
