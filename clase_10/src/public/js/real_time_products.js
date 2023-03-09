@@ -8,7 +8,8 @@ document.getElementById('new_product_form').addEventListener('submit', (event) =
         field_title = element.name.replace('input_', '');
         new_obj[field_title] = element.value;
     }
+
     console.log(new_obj);
-    socket.emit('new_product', new_obj);
+    socket.emit('product_submit', new_obj);
 
 })

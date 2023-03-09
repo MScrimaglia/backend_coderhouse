@@ -2,6 +2,7 @@ const express = require('express');
 const handlebars = require('express-handlebars');
 const productsRouter = require('./router/productsRouter.js');
 const cartsRouter = require('./router/cartsRouter.js');
+const ProductManager = require('./controller/ProductManager.js')
 const {Server} = require('socket.io')
 
 const app = express();
@@ -45,7 +46,9 @@ const socketServer = new Server(httpServer);
 socketServer.on('connection', (socket) => {
     console.log('New connection');
 
-    socket.on('new_product', (product) => {
+    socket.on('product_submit', async (product) => {
         console.log('PRODUCT TITLE: ' + product.title);
+        const productManager = new ProductManager();
+        await productManager.addProduct(product.title, product.description, product.price, 'sin imagen', product.code, product.stock);
     })
 })
